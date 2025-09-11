@@ -1,0 +1,48 @@
+.arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+
+  .marker-found-overlay {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100vw;
+  text-align: center;
+  z-index: 10;
+  color: white;
+  text-shadow: 2px 2px 8px #000;
+  pointer-events: none;
+}
+
+p {
+  color: red;
+}
+
+.bi-youtube {
+      color: red; /* Farbe */
+      font-size: 50px; /* Größe */
+      position: fixed;
+      bottom: 5vh;
+      right: 5vw;
+      z-index: 1000; /* Damit es über anderen Elementen liegt */
+      cursor: pointer;
+    }
+
+    .bi-youtube:hover {
+      color: darkred; /* Farbe beim Hover */
+    }

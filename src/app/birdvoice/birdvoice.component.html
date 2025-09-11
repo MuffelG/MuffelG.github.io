@@ -1,0 +1,89 @@
+<div class="arjs-loader">
+  <div>Loading, please wait...</div>
+</div>
+
+
+<!-- a-frame scene -->
+<a-scene
+  vr-mode-ui="enabled: false;"
+  renderer="antialias: true;"
+  embedded
+  arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+>
+
+ <a-nft
+    type="nft"
+    url="assets/Uhu"
+    scale="1 1 1"
+    smooth="true"
+    smoothCount="2"
+    smoothTolerance="1"
+    smoothThreshold="3"
+    (markerFound)="onMarkerFound('assets/Uhu.mp3')"
+    (markerLost)="onMarkerLost()"
+  >
+  <a-entity
+    light="type: directional; color: white; intensity: 1"
+    position="0 0 1"
+  >
+    </a-entity>
+   
+ </a-nft>
+
+ <a-nft
+    type="nft"
+    url="assets/Targets/Kuckuck"
+    scale="1 1 1"
+    smooth="true"
+    smoothCount="2"
+    smoothTolerance="1"
+    smoothThreshold="3"
+    (markerFound)="onMarkerFound('assets/Sounds/Kuckuck.wav')"
+    (markerLost)="onMarkerLost()"
+  >
+  <a-entity
+    light="type: directional; color: white; intensity: 1"
+    position="0 0 1"
+  >
+    </a-entity>
+   
+ </a-nft>
+ 
+
+<a-entity camera look-controls raycaster="objects: .clickable">
+  <a-cursor></a-cursor>
+</a-entity>
+</a-scene>  
+
+
+@if (tracked() === true) {
+<div class="marker-found-overlay">
+  <h1>Marker Found</h1>
+  <audio
+    src="{{soundPath}}"
+    autoplay
+    loop="true"
+    volume="1"></audio>
+</div>
+
+} @else {
+<div class="marker-found-overlay">
+  <i class="bi bi-youtube" (click)="PlaySearchedSound()"></i>
+  <button (click)="PlaySearchedSound()">Play Sound</button>
+</div>
+}
+
+@if (bPlaySearchedSound()) {
+  <div class="marker-found-overlay">
+
+    <audio
+    src="{{searchedSoundPath}}"
+    autoplay
+    loop="true"
+    volume="1"></audio>
+    </div>
+}
+@else {
+  <div class="marker-found-overlay">
+  </div>
+}

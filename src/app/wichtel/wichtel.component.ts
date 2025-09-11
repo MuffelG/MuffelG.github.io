@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA,  ChangeDetectorRef, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA,  ChangeDetectorRef, signal, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-wichtel',
@@ -7,10 +7,25 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA,  ChangeDetectorRef, signal } from '@
   templateUrl: './wichtel.component.html',
   styleUrl: './wichtel.component.css'
 })
-export class WichtelComponent {
+export class WichtelComponent implements AfterViewInit{
 tracked = signal<boolean>(false);
 
   constructor(private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit(): void {
+    // Prüfen, ob DeviceOrientation unterstützt wird
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (event) => {
+        // Beispiel: Passe den Y-Rotationswert der Kamera anhand des alpha-Werts an
+        const cameraEl = document.querySelector('[camera]');
+        if (cameraEl && event.alpha !== null) {
+          // Setzte die Rotation – hier einfach skaliert, je nach Bedarf anpassen
+          const rotationY = 360 - event.alpha;
+          cameraEl.setAttribute('rotation', `0 ${rotationY} 0`);
+        }
+      });
+    }
+  }
 
   onMarkerFound(soundpath: string) {
     console.log('Marker found');

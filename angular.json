@@ -13,7 +13,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/muffel-g.github.io",
+            "outputPath": 
+            {"base":"docs",
+            "browser": ""
+          },
+            "baseHref": "/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -23,8 +27,10 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
-              }
+                "input": "public"},
+                "src/assets",
+                "src/.nojekyll"
+              
             ],
             "styles": [
               "src/styles.css"
@@ -81,8 +87,11 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
-              }
+                "input": "public"}
+                , 
+                "src/assets",
+                "src/.nojekyll"
+              
             ],
             "styles": [
               "src/styles.css"
